@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.wht3v3r.notes.Note
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class SQLHandler(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
@@ -15,12 +17,12 @@ class SQLHandler(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_
     }
 
     override fun onCreate(p0: SQLiteDatabase?) {
-        p0!!.execSQL("Create table if not exists myNotes(title var_char(20) not null, content var_char(600) not null, date Date not null )")
+        p0!!.execSQL("Create table if not exists myNotes(title var_char(20) not null, content var_char(600) not null, date Datetime not null )")
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {}
 
-    fun update(title: String, content: String, date: LocalDate) {
+    fun update(title: String, content: String, date: LocalDateTime) {
         val db = this.writableDatabase
 
         db.execSQL(
@@ -53,7 +55,7 @@ class SQLHandler(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_
                 Note(
                     cursor.getString(0),
                     cursor.getString(1),
-                    LocalDate.parse(cursor.getString(2))
+                    LocalDateTime.parse(cursor.getString(2)).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
                 )
             )
 
@@ -63,7 +65,7 @@ class SQLHandler(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_
                     Note(
                         cursor.getString(0),
                         cursor.getString(1),
-                        LocalDate.parse(cursor.getString(2))
+                        LocalDateTime.parse(cursor.getString(2)).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
                     )
                 )
             }

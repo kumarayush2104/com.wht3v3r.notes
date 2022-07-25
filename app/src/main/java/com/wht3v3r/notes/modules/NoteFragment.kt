@@ -8,10 +8,11 @@ import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.wht3v3r.notes.R
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 class NoteFragment(
     private var noteTitle: String,
-    private var noteDate: LocalDate,
+    private var noteDate: String,
     private var noteContent: String
     ) : BottomSheetDialogFragment() {
 

@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.wht3v3r.notes.R
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 class NoteEditFacility : AppCompatActivity() {
 
@@ -45,7 +46,7 @@ class NoteEditFacility : AppCompatActivity() {
                 else if(noteContent.text.toString().isEmpty()) Toast.makeText(applicationContext, "How are we supposed to save an empty note ??", Toast.LENGTH_SHORT).show()
 
                 else {
-                    SQLHandler(applicationContext).update(noteTitle.text.toString(), noteContent.text.toString(), LocalDate.now())
+                    SQLHandler(applicationContext).update(noteTitle.text.toString(), noteContent.text.toString(), LocalDateTime.now())
                     finish()
                     Toast.makeText(applicationContext, "Note Added Successfully", Toast.LENGTH_SHORT).show()
                 }
